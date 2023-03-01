@@ -1,22 +1,22 @@
 class Vocabulary implements Comparable<Vocabulary> {
   int id;
-  String word;
-  String translation;
+  String english;
+  String uzbek;
   String createdAt;
 
   Vocabulary({
       required this.id,
-      required this.word,
-      required this.translation,
+      required this.english,
+      required this.uzbek,
       required this.createdAt});
 
   @override
   String toString() {
-    return 'Vocabulary{id: $id, word: $word, translation: $translation, createdAt: $createdAt}';
+    return 'Vocabulary{id: $id, word: $english, translation: $uzbek, createdAt: $createdAt}';
   }
 
   @override
   int compareTo(Vocabulary other) {
-    return word.compareTo(other.word);
+    return createdAt.compareTo(other.createdAt);
   }
 }
