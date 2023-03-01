@@ -13,10 +13,6 @@ class IOService {
     return int.tryParse(word.trim()) ?? 0;
   }
 
-  double get numberDouble {
-    String word = stdin.readLineSync() ?? '';
-    return double.tryParse(word.trim()) ?? 0.0;
-  }
 
   void console(Object? object) {
     stdout.write(object);
