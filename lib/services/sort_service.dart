@@ -9,6 +9,37 @@ class SortVocabulary {
     for (int i = 0; i < vocabulary.length; i++) {
       print("${i + 1} ${vocabulary[i].english} - ${vocabulary[i].uzbek}");
     }
+    print("\n");
+    print("""
+   1. Return to top of sort
+   2. Update
+   3. Delete
+   0. Back
+  """);
+    int num = io.number;
+    switch (num) {
+      case 0:
+        {
+          AllVocabularyPage();
+        }
+        break;
+      case 1:
+        {
+          allVocabulary();
+        }
+        break;
+      case 2:
+        {
+          print("Select the order of the word you want to change");
+          String num = io.text;
+          for (var item in vocabulary) {
+            if (num == item.english || num == item.uzbek) {
+              UpdateDeleteVocabulary.updateVocabulary(item.id);
+              allVocabulary();
+            }
+          }
+        }
+    }
   }
 
   static void sortInEnglishVocabulary() {
@@ -30,6 +61,7 @@ class SortVocabulary {
     for (int i = 0; i < vocabulary.length; i++) {
       print("${i + 1} ${vocabulary[i].english} - ${vocabulary[i].uzbek}");
     }
+    print("\n");
 
     print("""
    1. Return to top of sort
@@ -54,7 +86,7 @@ class SortVocabulary {
           print("Select the order of the word you want to change");
           String num = io.text;
           for (var item in vocabulary) {
-            if (num  == item.english||num  == item.uzbek) {
+            if (num == item.english || num == item.uzbek) {
               UpdateDeleteVocabulary.updateVocabulary(item.id);
               sortInEnglishVocabulary();
             }
@@ -66,7 +98,7 @@ class SortVocabulary {
           print("Select the order of the word you want to change");
           String num = io.text;
           for (var item in vocabulary) {
-            if (num  == item.english||num  == item.uzbek) {
+            if (num == item.english || num == item.uzbek) {
               UpdateDeleteVocabulary.deleteVocabulary(item.id);
               sortInEnglishVocabulary();
             }
@@ -99,6 +131,7 @@ class SortVocabulary {
     for (int i = 0; i < vocabulary.length; i++) {
       print("${i + 1} ${vocabulary[i].uzbek} - ${vocabulary[i].english}");
     }
+    print("\n");
 
     print("""
    1. Return to top of sort
@@ -123,7 +156,7 @@ class SortVocabulary {
           print("Select the order of the word you want to change");
           String num = io.text;
           for (var item in vocabulary) {
-            if (num  == item.english||num==item.uzbek) {
+            if (num == item.english || num == item.uzbek) {
               UpdateDeleteVocabulary.updateVocabulary(item.id);
               sortInUzbekVocabulary();
             }
@@ -135,7 +168,7 @@ class SortVocabulary {
           print("Select the order of the word you want to change");
           String num = io.text;
           for (var item in vocabulary) {
-            if (num  == item.english||item.uzbek==num) {
+            if (num == item.english || item.uzbek == num) {
               UpdateDeleteVocabulary.deleteVocabulary(item.id);
               sortInUzbekVocabulary();
             }
@@ -170,6 +203,7 @@ class SortVocabulary {
     for (int i = 0; i < vocabulary.length; i++) {
       print("${i + 1} ${vocabulary[i].english} - ${vocabulary[i].uzbek}");
     }
+    print("\n");
 
     print("""
    1. Return to top of sort
@@ -194,7 +228,7 @@ class SortVocabulary {
           print("Select the order of the word you want to change");
           String num = io.text;
           for (var item in vocabulary) {
-            if (num  == item.english||item.uzbek==num) {
+            if (num == item.english || item.uzbek == num) {
               UpdateDeleteVocabulary.updateVocabulary(item.id);
               sortCreatedVocabulary();
             }
@@ -206,7 +240,7 @@ class SortVocabulary {
           print("Select the order of the word you want to change");
           String num = io.text;
           for (var item in vocabulary) {
-            if (num == item.english||num==item.uzbek) {
+            if (num == item.english || num == item.uzbek) {
               UpdateDeleteVocabulary.deleteVocabulary(item.id);
               sortCreatedVocabulary();
             }
@@ -220,6 +254,3 @@ class SortVocabulary {
     }
   }
 }
-
-
-
