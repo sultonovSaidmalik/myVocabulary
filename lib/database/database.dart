@@ -3,17 +3,17 @@ import '../model/vocabulary.dart';
 List<Vocabulary> vocabulary = [
   Vocabulary(
       id: 0,
-      english: 'english',
-      uzbek: 'uzbek',
+      english: 'Hello',
+      uzbek: 'Salom',
       createdAt: DateTime.now().toString()),
   Vocabulary(
       id: 1,
-      english: 'english',
-      uzbek: 'uzbek',
+      english: 'Car',
+      uzbek: 'Mashina',
       createdAt: DateTime.now().toString()),
   Vocabulary(
       id: 2,
-      english: 'english',
-      uzbek: 'uzbek',
+      english: 'Apple',
+      uzbek: 'Olma',
       createdAt: DateTime.now().toString()),
 ];
