@@ -1,6 +1,6 @@
 import 'package:myvocabulary/pages/add_vocabulary_page.dart';
 import 'package:myvocabulary/pages/all_vocabulary_page.dart';
-import 'package:myvocabulary/pages/game_page.dart';
+import 'package:myvocabulary/pages/game_settings_page.dart';
 import 'package:myvocabulary/pages/search_page.dart';
 import 'package:myvocabulary/services/builder.dart';
 import 'package:myvocabulary/services/utils.dart';
@@ -30,7 +30,7 @@ class IntroPage extends Builder{
         AllVocabularyPage();
       }break;
       case 4:{
-        GamePage();
+        GameSettingsPage();
       }break;
       case 0:{
         Utils.exit();
