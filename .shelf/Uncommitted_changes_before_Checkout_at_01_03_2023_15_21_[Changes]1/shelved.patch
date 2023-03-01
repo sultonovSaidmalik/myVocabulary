@@ -1,0 +1,45 @@
+Index: pubspec.yaml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>name: myvocabulary\r\ndescription: A sample command-line application.\r\nversion: 1.0.0\r\n# repository: https://github.com/my_org/my_repo\r\n\r\nenvironment:\r\n  sdk: '>=2.19.0 <3.0.0'\r\n\r\n# dependencies:\r\n#   path: ^1.8.0\r\n\r\ndev_dependencies:\r\n  lints: ^2.0.0\r\n  test: ^1.21.0\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pubspec.yaml b/pubspec.yaml
+--- a/pubspec.yaml	
++++ b/pubspec.yaml	
+@@ -4,7 +4,7 @@
+ # repository: https://github.com/my_org/my_repo
+ 
+ environment:
+-  sdk: '>=2.19.0 <3.0.0'
++  sdk: '>=2.18.0 <3.0.0'
+ 
+ # dependencies:
+ #   path: ^1.8.0
+Index: myvocabulary.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<module type=\"WEB_MODULE\" version=\"4\">\r\n  <component name=\"NewModuleRootManager\" inherit-compiler-output=\"true\">\r\n    <exclude-output />\r\n    <content url=\"file://$MODULE_DIR$\" />\r\n    <orderEntry type=\"sourceFolder\" forTests=\"false\" />\r\n    <orderEntry type=\"library\" name=\"Dart SDK\" level=\"project\" />\r\n  </component>\r\n</module>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/myvocabulary.iml b/myvocabulary.iml
+--- a/myvocabulary.iml	
++++ b/myvocabulary.iml	
+@@ -2,8 +2,13 @@
+ <module type="WEB_MODULE" version="4">
+   <component name="NewModuleRootManager" inherit-compiler-output="true">
+     <exclude-output />
+-    <content url="file://$MODULE_DIR$" />
++    <content url="file://$MODULE_DIR$">
++      <excludeFolder url="file://$MODULE_DIR$/.pub" />
++      <excludeFolder url="file://$MODULE_DIR$/.dart_tool" />
++      <excludeFolder url="file://$MODULE_DIR$/build" />
++    </content>
+     <orderEntry type="sourceFolder" forTests="false" />
+     <orderEntry type="library" name="Dart SDK" level="project" />
++    <orderEntry type="library" name="Dart Packages" level="project" />
+   </component>
+ </module>
+\ No newline at end of file
