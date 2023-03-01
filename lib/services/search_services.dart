@@ -1,16 +1,11 @@
 import '../database/database.dart';
 
-class Search{
-  int search(String str) {
+class Search {
+  void search(int id) {
     for (var item in vocabulary) {
-      var regex = RegExp('$str');
-      if (regex.hasMatch(item.english.toLowerCase())) {
-        return item.id;
-      }
-      if (regex.hasMatch(item.uzbek.toLowerCase())) {
-        return item.id;
-      }
+    if(item.id == id){
+      print("${item.english}  ${item.uzbek}");
     }
-    return 00;
+    }
   }
 }

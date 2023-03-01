@@ -154,7 +154,7 @@ class SortVocabulary {
     String str = io.text;
     if (str == "n" || str == "no") {
       vocabulary.sort((a, b) {
-        return a.uzbek.compareTo(b.uzbek);
+        return a.uzbek.toLowerCase().compareTo(b.uzbek.toLowerCase());
       });
     } else if (str == "y" || str == "yes") {
       vocabulary.sort((a, b) {

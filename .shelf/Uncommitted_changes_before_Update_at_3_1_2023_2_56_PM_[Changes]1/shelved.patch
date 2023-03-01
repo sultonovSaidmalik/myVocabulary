@@ -1,0 +1,20 @@
+Index: myvocabulary.ipr
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"InspectionProjectProfileManager\">\r\n    <profile version=\"1.0\">\r\n      <option name=\"myName\" value=\"Project Default\" />\r\n    </profile>\r\n    <version value=\"1.0\" />\r\n  </component>\r\n  <component name=\"ProjectModuleManager\">\r\n    <modules>\r\n      <module fileurl=\"file://$PROJECT_DIR$/myvocabulary.iml\" filepath=\"$PROJECT_DIR$/myvocabulary.iml\" />\r\n    </modules>\r\n  </component>\r\n  <component name=\"ProjectRootManager\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n  <component name=\"libraryTable\">\r\n    <library name=\"Dart SDK\">\r\n      <CLASSES>\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/async\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/cli\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/collection\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/convert\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/core\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/developer\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/ffi\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/html\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/indexed_db\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/io\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/isolate\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/js\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/js_util\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/math\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/mirrors\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/svg\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/typed_data\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/web_audio\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/web_gl\" />\r\n      </CLASSES>\r\n      <JAVADOC />\r\n      <SOURCES />\r\n    </library>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/myvocabulary.ipr b/myvocabulary.ipr
+--- a/myvocabulary.ipr	
++++ b/myvocabulary.ipr	
+@@ -14,6 +14,9 @@
+   <component name="ProjectRootManager">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
++  <component name="VcsDirectoryMappings">
++    <mapping directory="" vcs="Git" />
++  </component>
+   <component name="libraryTable">
+     <library name="Dart SDK">
+       <CLASSES>

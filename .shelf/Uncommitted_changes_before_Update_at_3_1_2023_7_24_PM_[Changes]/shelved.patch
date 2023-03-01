@@ -1,0 +1,450 @@
+Index: lib/pages/all_vocabulary_page.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import 'package:myvocabulary/database/database.dart';\r\nimport 'package:myvocabulary/pages/intro_page.dart';\r\nimport 'package:myvocabulary/services/builder.dart';\r\nimport 'package:myvocabulary/services/io_service.dart';\r\n\r\nclass AllVocabularyPage extends Builder {\r\n  @override\r\n  void builder() {\r\n    print(\"\"\"\r\n  In what order do you want to output the dictionary?\r\n   1. Return to home page\r\n   2. According to the created time\r\n   3. Sort in Uzbek language  \r\n   4. Sort in English\r\n  \"\"\");\r\n    int num = io.number;\r\n\r\n    switch (num) {\r\n      case 1:\r\n        {\r\n          IntroPage();\r\n        }\r\n        break;\r\n      case 2:\r\n        {\r\n          sortCreatedVocabulary();\r\n        }\r\n        break;\r\n      case 3:\r\n        {\r\n          sortInUzbekVocabulary();\r\n        }\r\n        break;\r\n      case 4:\r\n        {\r\n          sortInEnglishVocabulary();\r\n        }\r\n        break;\r\n      default:\r\n        {\r\n          print(\"Iltimos tartib raqamni tug'ri kiriting\");\r\n          AllVocabularyPage();\r\n        }\r\n    }\r\n  }\r\n}\r\n\r\nvoid sortInEnglishVocabulary() {\r\n  print(\"Do you want to sort alphabetically or vice versa? (y/n)\");\r\n  String str = io.text;\r\n  if (str == \"n\" || str == \"no\") {\r\n    vocabulary.sort((a, b) {\r\n      return a.english.compareTo(b.english);\r\n    });\r\n  } else if (str == \"y\" || str == \"yes\") {\r\n    vocabulary.sort((a, b) {\r\n      return b.english.compareTo(a.english);\r\n    });\r\n  } else {\r\n    print(\"Please enter the correct command\");\r\n    sortInEnglishVocabulary();\r\n  }\r\n\r\n  for (int i = 0; i < vocabulary.length; i++) {\r\n    print(\"${i + 1} ${vocabulary[i].english} - ${vocabulary[i].uzbek}\");\r\n  }\r\n\r\n  print(\"Back to Home(1) and Back to All vocabulary(0)\");\r\n\r\n  int num = io.number;\r\n  if (num == 1) {\r\n    IntroPage();\r\n  } else {\r\n    AllVocabularyPage();\r\n  }\r\n}\r\n\r\nvoid sortInUzbekVocabulary() {\r\n  print(\"Do you want to sort alphabetically or vice versa? (y/n)\");\r\n  String str = io.text;\r\n  if (str == \"n\" || str == \"no\") {\r\n    vocabulary.sort((a, b) {\r\n      return a.uzbek.compareTo(b.uzbek);\r\n    });\r\n  } else if (str == \"y\" || str == \"yes\") {\r\n    vocabulary.sort((a, b) {\r\n      return b.uzbek.compareTo(a.uzbek);\r\n    });\r\n  } else {\r\n    print(\"Please enter the correct command\");\r\n    sortInEnglishVocabulary();\r\n  }\r\n\r\n  for (int i = 0; i < vocabulary.length; i++) {\r\n    print(\"${i + 1} ${vocabulary[i].uzbek} - ${vocabulary[i].english}\");\r\n  }\r\n  print(\"Back to Home(1) and Back to All vocabulary(0)\");\r\n  int num = io.number;\r\n  if (num == 1) {\r\n    IntroPage();\r\n  } else {\r\n    AllVocabularyPage();\r\n  }\r\n}\r\n\r\nvoid sortCreatedVocabulary() {\r\n  print(\"Do you want to sort created or vice versa? (y/n)\");\r\n  String str = io.text;\r\n  if (str == \"n\" || str == \"no\") {\r\n    vocabulary.sort((a, b) {\r\n      return a.uzbek.compareTo(b.uzbek);\r\n    });\r\n  } else if (str == \"y\" || str == \"yes\") {\r\n    vocabulary.sort((a, b) {\r\n      return b.uzbek.compareTo(a.uzbek);\r\n    });\r\n  } else {\r\n    print(\"Please enter the correct command\");\r\n    sortInEnglishVocabulary();\r\n  }\r\n  vocabulary.sort((a, b) {\r\n    return a.createdAt.compareTo(b.createdAt);\r\n  });\r\n  for (int i = 0; i < vocabulary.length; i++) {\r\n    print(\"${i + 1} ${vocabulary[i].english} - ${vocabulary[i].uzbek}\");\r\n  }\r\n  print(\"Back to Home(1) and Back to All vocabulary(0)\");\r\n  int num = io.number;\r\n  if (num == 1) {\r\n    IntroPage();\r\n  } else {\r\n    AllVocabularyPage();\r\n  }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/lib/pages/all_vocabulary_page.dart b/lib/pages/all_vocabulary_page.dart
+--- a/lib/pages/all_vocabulary_page.dart	(revision 3c8915b4f27fba9e1227583cd3efa0694d51d2bd)
++++ b/lib/pages/all_vocabulary_page.dart	(date 1677676799222)
+@@ -1,134 +1,53 @@
+-import 'package:myvocabulary/database/database.dart';
+ import 'package:myvocabulary/pages/intro_page.dart';
+ import 'package:myvocabulary/services/builder.dart';
+ import 'package:myvocabulary/services/io_service.dart';
++import 'package:myvocabulary/services/sort_service.dart';
+ 
+ class AllVocabularyPage extends Builder {
+   @override
+   void builder() {
+     print("""
+   In what order do you want to output the dictionary?
+-   1. Return to home page
++   1. All vocabulary
+    2. According to the created time
+    3. Sort in Uzbek language  
+    4. Sort in English
++   0. Back
+   """);
+     int num = io.number;
+ 
+     switch (num) {
++      case 0:
++        {
++          IntroPage();
++        }
++        break;
+       case 1:
+         {
+-          IntroPage();
++          SortVocabulary.allVocabulary();
+         }
+         break;
+       case 2:
+         {
+-          sortCreatedVocabulary();
++          SortVocabulary.sortCreatedVocabulary();
+         }
+         break;
+       case 3:
+         {
+-          sortInUzbekVocabulary();
++          SortVocabulary.sortInUzbekVocabulary();
+         }
+         break;
+       case 4:
+         {
+-          sortInEnglishVocabulary();
++          SortVocabulary.sortInEnglishVocabulary();
+         }
+         break;
+       default:
+         {
+-          print("Iltimos tartib raqamni tug'ri kiriting");
++          print("Please enter the order number correctly");
+           AllVocabularyPage();
+         }
+     }
+-  }
+-}
+-
+-void sortInEnglishVocabulary() {
+-  print("Do you want to sort alphabetically or vice versa? (y/n)");
+-  String str = io.text;
+-  if (str == "n" || str == "no") {
+-    vocabulary.sort((a, b) {
+-      return a.english.compareTo(b.english);
+-    });
+-  } else if (str == "y" || str == "yes") {
+-    vocabulary.sort((a, b) {
+-      return b.english.compareTo(a.english);
+-    });
+-  } else {
+-    print("Please enter the correct command");
+-    sortInEnglishVocabulary();
+-  }
+-
+-  for (int i = 0; i < vocabulary.length; i++) {
+-    print("${i + 1} ${vocabulary[i].english} - ${vocabulary[i].uzbek}");
+-  }
+-
+-  print("Back to Home(1) and Back to All vocabulary(0)");
+-
+-  int num = io.number;
+-  if (num == 1) {
+-    IntroPage();
+-  } else {
+-    AllVocabularyPage();
+-  }
+-}
+-
+-void sortInUzbekVocabulary() {
+-  print("Do you want to sort alphabetically or vice versa? (y/n)");
+-  String str = io.text;
+-  if (str == "n" || str == "no") {
+-    vocabulary.sort((a, b) {
+-      return a.uzbek.compareTo(b.uzbek);
+-    });
+-  } else if (str == "y" || str == "yes") {
+-    vocabulary.sort((a, b) {
+-      return b.uzbek.compareTo(a.uzbek);
+-    });
+-  } else {
+-    print("Please enter the correct command");
+-    sortInEnglishVocabulary();
+-  }
+-
+-  for (int i = 0; i < vocabulary.length; i++) {
+-    print("${i + 1} ${vocabulary[i].uzbek} - ${vocabulary[i].english}");
+-  }
+-  print("Back to Home(1) and Back to All vocabulary(0)");
+-  int num = io.number;
+-  if (num == 1) {
+-    IntroPage();
+-  } else {
+-    AllVocabularyPage();
+-  }
+-}
+-
+-void sortCreatedVocabulary() {
+-  print("Do you want to sort created or vice versa? (y/n)");
+-  String str = io.text;
+-  if (str == "n" || str == "no") {
+-    vocabulary.sort((a, b) {
+-      return a.uzbek.compareTo(b.uzbek);
+-    });
+-  } else if (str == "y" || str == "yes") {
+-    vocabulary.sort((a, b) {
+-      return b.uzbek.compareTo(a.uzbek);
+-    });
+-  } else {
+-    print("Please enter the correct command");
+-    sortInEnglishVocabulary();
+-  }
+-  vocabulary.sort((a, b) {
+-    return a.createdAt.compareTo(b.createdAt);
+-  });
+-  for (int i = 0; i < vocabulary.length; i++) {
+-    print("${i + 1} ${vocabulary[i].english} - ${vocabulary[i].uzbek}");
+-  }
+-  print("Back to Home(1) and Back to All vocabulary(0)");
+-  int num = io.number;
+-  if (num == 1) {
+-    IntroPage();
+-  } else {
+-    AllVocabularyPage();
+   }
+ }
++
+Index: lib/services/update_delete_service.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/lib/services/update_delete_service.dart b/lib/services/update_delete_service.dart
+new file mode 100644
+--- /dev/null	(date 1677680422246)
++++ b/lib/services/update_delete_service.dart	(date 1677680422246)
+@@ -0,0 +1,46 @@
++import 'package:myvocabulary/database/database.dart';
++import 'package:myvocabulary/pages/all_vocabulary_page.dart';
++
++import 'io_service.dart';
++
++class UpdateDeleteVocabulary {
++ static void updateVocabulary(int id) {
++    for (var item in vocabulary) {
++      if (id == item.id) {
++        print("${item.english} -${item.uzbek}");
++        print("Add vocabulary to your word y/n");
++        String str1 = io.text;
++        if (str1.toLowerCase() == "y" || str1.toLowerCase() == "no") {
++          print("Enter a vocabulary word:");
++          String wordStr = io.text;
++          item.english = wordStr;
++        }
++        print("Add vocabulary to your translation y/n");
++        String str2=io.text;
++        if(str2.toLowerCase()=="y"||str2.toLowerCase()=="yes"){
++          print("Enter a vocabulary translation:");
++          String translationStr = io.text;
++          item.uzbek = translationStr;
++          print("${item.english} ${item.uzbek}");
++        }
++
++        print("Update changed successfully");
++        AllVocabularyPage();
++      }
++    }
++  }
++
++ static void deleteVocabulary(int id) {
++    int itemIndex = vocabulary.indexWhere((item) => item.id == id);
++    if (itemIndex == -1) {
++      print("Could not find vocabulary item with id $id");
++    } else {
++      vocabulary.removeAt(itemIndex);
++      print("Delete changed successfully");
++      AllVocabularyPage();
++    }
++  }
++
++
++
++}
+Index: lib/services/sort_service.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/lib/services/sort_service.dart b/lib/services/sort_service.dart
+new file mode 100644
+--- /dev/null	(date 1677680422261)
++++ b/lib/services/sort_service.dart	(date 1677680422261)
+@@ -0,0 +1,225 @@
++import 'package:myvocabulary/database/database.dart';
++import 'package:myvocabulary/pages/all_vocabulary_page.dart';
++import 'package:myvocabulary/pages/intro_page.dart';
++import 'package:myvocabulary/services/io_service.dart';
++import 'package:myvocabulary/services/update_delete_service.dart';
++
++class SortVocabulary {
++  static void allVocabulary() {
++    for (int i = 0; i < vocabulary.length; i++) {
++      print("${i + 1} ${vocabulary[i].english} - ${vocabulary[i].uzbek}");
++    }
++  }
++
++  static void sortInEnglishVocabulary() {
++    print("Do you want to sort alphabetically or vice versa? (y/n)");
++    String str = io.text;
++    if (str == "n" || str == "no") {
++      vocabulary.sort((a, b) {
++        return a.english.compareTo(b.english);
++      });
++    } else if (str == "y" || str == "yes") {
++      vocabulary.sort((a, b) {
++        return b.english.compareTo(a.english);
++      });
++    } else {
++      print("Please enter the correct command");
++      sortInEnglishVocabulary();
++    }
++
++    for (int i = 0; i < vocabulary.length; i++) {
++      print("${i + 1} ${vocabulary[i].english} - ${vocabulary[i].uzbek}");
++    }
++
++    print("""
++   1. Return to top of sort
++   2. Update
++   3. Delete
++   0. Back
++  """);
++    int num = io.number;
++    switch (num) {
++      case 0:
++        {
++          AllVocabularyPage();
++        }
++        break;
++      case 1:
++        {
++          sortInEnglishVocabulary();
++        }
++        break;
++      case 2:
++        {
++          print("Select the order of the word you want to change");
++          String num = io.text;
++          for (var item in vocabulary) {
++            if (num  == item.english||num  == item.uzbek) {
++              UpdateDeleteVocabulary.updateVocabulary(item.id);
++              sortInEnglishVocabulary();
++            }
++          }
++        }
++        break;
++      case 3:
++        {
++          print("Select the order of the word you want to change");
++          String num = io.text;
++          for (var item in vocabulary) {
++            if (num  == item.english||num  == item.uzbek) {
++              UpdateDeleteVocabulary.deleteVocabulary(item.id);
++              sortInEnglishVocabulary();
++            }
++          }
++        }
++        break;
++      default:
++        {
++          IntroPage();
++        }
++    }
++  }
++
++  static void sortInUzbekVocabulary() {
++    print("Do you want to sort alphabetically or vice versa? (y/n)");
++    String str = io.text;
++    if (str == "n" || str == "no") {
++      vocabulary.sort((a, b) {
++        return a.uzbek.compareTo(b.uzbek);
++      });
++    } else if (str == "y" || str == "yes") {
++      vocabulary.sort((a, b) {
++        return b.uzbek.compareTo(a.uzbek);
++      });
++    } else {
++      print("Please enter the correct command");
++      sortInUzbekVocabulary();
++    }
++
++    for (int i = 0; i < vocabulary.length; i++) {
++      print("${i + 1} ${vocabulary[i].uzbek} - ${vocabulary[i].english}");
++    }
++
++    print("""
++   1. Return to top of sort
++   2. Update
++   3. Delete
++   0. Back
++  """);
++    int num = io.number;
++    switch (num) {
++      case 0:
++        {
++          AllVocabularyPage();
++        }
++        break;
++      case 1:
++        {
++          sortInUzbekVocabulary();
++        }
++        break;
++      case 2:
++        {
++          print("Select the order of the word you want to change");
++          String num = io.text;
++          for (var item in vocabulary) {
++            if (num  == item.english||num==item.uzbek) {
++              UpdateDeleteVocabulary.updateVocabulary(item.id);
++              sortInUzbekVocabulary();
++            }
++          }
++        }
++        break;
++      case 3:
++        {
++          print("Select the order of the word you want to change");
++          String num = io.text;
++          for (var item in vocabulary) {
++            if (num  == item.english||item.uzbek==num) {
++              UpdateDeleteVocabulary.deleteVocabulary(item.id);
++              sortInUzbekVocabulary();
++            }
++          }
++        }
++        break;
++      default:
++        {
++          IntroPage();
++        }
++    }
++  }
++
++  static void sortCreatedVocabulary() {
++    print("Do you want to sort created or vice versa? (y/n)");
++    String str = io.text;
++    if (str == "n" || str == "no") {
++      vocabulary.sort((a, b) {
++        return a.uzbek.compareTo(b.uzbek);
++      });
++    } else if (str == "y" || str == "yes") {
++      vocabulary.sort((a, b) {
++        return b.uzbek.compareTo(a.uzbek);
++      });
++    } else {
++      print("Please enter the correct command");
++      sortCreatedVocabulary();
++    }
++    vocabulary.sort((a, b) {
++      return a.createdAt.compareTo(b.createdAt);
++    });
++    for (int i = 0; i < vocabulary.length; i++) {
++      print("${i + 1} ${vocabulary[i].english} - ${vocabulary[i].uzbek}");
++    }
++
++    print("""
++   1. Return to top of sort
++   2. Update
++   3. Delete
++   0. Back
++  """);
++    int num = io.number;
++    switch (num) {
++      case 0:
++        {
++          AllVocabularyPage();
++        }
++        break;
++      case 1:
++        {
++          sortInEnglishVocabulary();
++        }
++        break;
++      case 2:
++        {
++          print("Select the order of the word you want to change");
++          String num = io.text;
++          for (var item in vocabulary) {
++            if (num  == item.english||item.uzbek==num) {
++              UpdateDeleteVocabulary.updateVocabulary(item.id);
++              sortCreatedVocabulary();
++            }
++          }
++        }
++        break;
++      case 3:
++        {
++          print("Select the order of the word you want to change");
++          String num = io.text;
++          for (var item in vocabulary) {
++            if (num == item.english||num==item.uzbek) {
++              UpdateDeleteVocabulary.deleteVocabulary(item.id);
++              sortCreatedVocabulary();
++            }
++          }
++        }
++        break;
++      default:
++        {
++          IntroPage();
++        }
++    }
++  }
++}
++
++
++
