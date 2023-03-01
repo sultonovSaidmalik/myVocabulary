@@ -19,4 +19,15 @@ class Vocabulary implements Comparable<Vocabulary> {
   int compareTo(Vocabulary other) {
     return createdAt.compareTo(other.createdAt);
   }
+
+  @override
+  bool operator ==(Object other) =>
+      other is Vocabulary &&
+          id == other.id &&
+          english == other.english &&
+          uzbek == other.uzbek &&
+          createdAt == other.createdAt;
+
+  @override
+  int get hashCode => Object.hash(id, english ,uzbek ,createdAt);
 }

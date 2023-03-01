@@ -1,6 +1,6 @@
 import '../model/vocabulary.dart';
 
-List<Vocabulary> vocabulary = [
+Set<Vocabulary> vocabulary = {
   Vocabulary(
       id: 0,
       english: 'Hello',
@@ -16,4 +16,4 @@ List<Vocabulary> vocabulary = [
       english: 'Apple',
       uzbek: 'Olma',
       createdAt: DateTime.now().toString()),
-];
+};
