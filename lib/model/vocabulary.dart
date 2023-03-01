@@ -4,8 +4,8 @@ class Vocabulary implements Comparable<Vocabulary> {
   String uzbek;
   String createdAt;
 
-  Vocabulary({
-      required this.id,
+  Vocabulary(
+      {required this.id,
       required this.english,
       required this.uzbek,
       required this.createdAt});
