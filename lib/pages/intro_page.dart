@@ -1,16 +1,19 @@
 import 'package:myvocabulary/pages/add_vocabulary_page.dart';
 import 'package:myvocabulary/pages/all_vocabulary_page.dart';
 import 'package:myvocabulary/pages/game_page.dart';
+import 'package:myvocabulary/services/builder.dart';
+import 'package:myvocabulary/services/utils.dart';
 
 import '../services/io_service.dart';
 
-class IntroPage{
-  IntroPage(){intro();}
-  void intro(){
+class IntroPage extends Builder{
+  @override
+  void builder() {
+    super.builder();
     print('1. Add word');
     print('2. All vocabularies');
     print('3. Game');
-    print('4. Exit');
+    print('0. Exit');
 
     int number = io.number;
 
@@ -24,13 +27,12 @@ class IntroPage{
       case 3:{
         GamePage();
       }break;
-      case 4:{
-        print('EXIT');
-        return;
-      }
+      case 0:{
+        Utils.exit();
+      }break;
       default:{
         print('Wrong command');
-        intro();
+        builder();
       }
     }
   }

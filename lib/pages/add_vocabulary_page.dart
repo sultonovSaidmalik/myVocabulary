@@ -16,34 +16,42 @@ class AddVocabulary extends Builder {
 
     io.console('Uzbek :');
     String uzbek = io.text.trim().toLowerCase();
-    vocabulary.add(Vocabulary(
-      id: vocabulary.length + 1,
-      english: 'cat',
-      uzbek: 'mushuk',
-      createdAt: DateTime.now().toString()
-    ));
-
-    print('\t\t Succesfully Created ');
-    io.console('Do you want to add more ?\nyes\nno\n');
-    String yesno = io.text;
-    if (yesno.toLowerCase() == 'yes' || yesno.toLowerCase() == 'y') {
-      AddVocabulary();
+    int count = 0;
+    for (var item in vocabulary) {
+      if (english == item.english.toLowerCase()) {
+        print('\nThere is such a word in the dictionary !');
+        AddVocabulary();
+        count++;
+      }
     }
-    print('1. Back');
-    print('0. Exit');
-    int page = io.number;
+    if (count == 0) {
+      vocabulary.add(Vocabulary(
+          id: vocabulary.length + 1,
+          english: english,
+          uzbek: uzbek,
+          createdAt: DateTime.now().toString()));
+      print('\t\t Succesfully Created ');
+      io.console('Do you want to add more ?\nyes\nno\n');
+      String yesno = io.text;
+      if (yesno.toLowerCase() == 'yes' || yesno.toLowerCase() == 'y') {
+        AddVocabulary();
+      }
+      print('1. Back');
+      print('0. Exit');
+      int page = io.number;
 
-    switch (page) {
-      case 1:
-        {
-          IntroPage();
-        }
-        break;
-      case 0:
-        {
-          Utils.exit();
-        }
-        break;
+      switch (page) {
+        case 1:
+          {
+            IntroPage();
+          }
+          break;
+        case 0:
+          {
+            Utils.exit();
+          }
+          break;
+      }
     }
   }
 }
