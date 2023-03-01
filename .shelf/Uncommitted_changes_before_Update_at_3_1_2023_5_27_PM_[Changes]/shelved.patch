@@ -1,0 +1,239 @@
+Index: lib/database/database.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import '../model/vocabulary.dart';\r\n\r\nList<Vocabulary> vocabulary = [\r\n  Vocabulary(\r\n      id: 0,\r\n      english: 'Hello',\r\n      uzbek: 'Salom',\r\n      createdAt: DateTime.now().toString()),\r\n  Vocabulary(\r\n      id: 1,\r\n      english: 'Car',\r\n      uzbek: 'Mashina',\r\n      createdAt: DateTime.now().toString()),\r\n  Vocabulary(\r\n      id: 2,\r\n      english: 'Apple',\r\n      uzbek: 'Olma',\r\n      createdAt: DateTime.now().toString()),\r\n];\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/lib/database/database.dart b/lib/database/database.dart
+--- a/lib/database/database.dart	(revision 73838f1b264ea9cbbcbed00bc80beb33d43a9d3d)
++++ b/lib/database/database.dart	(date 1677669480255)
+@@ -1,3 +1,4 @@
++
+ import '../model/vocabulary.dart';
+ 
+ List<Vocabulary> vocabulary = [
+Index: lib/model/vocabulary.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>class Vocabulary implements Comparable<Vocabulary> {\r\n  int id;\r\n  String english;\r\n  String uzbek;\r\n  String createdAt;\r\n\r\n  Vocabulary({\r\n      required this.id,\r\n      required this.english,\r\n      required this.uzbek,\r\n      required this.createdAt});\r\n\r\n  @override\r\n  String toString() {\r\n    return 'Vocabulary{id: $id, word: $english, translation: $uzbek, createdAt: $createdAt}';\r\n  }\r\n\r\n  @override\r\n  int compareTo(Vocabulary other) {\r\n    return createdAt.compareTo(other.createdAt);\r\n  }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/lib/model/vocabulary.dart b/lib/model/vocabulary.dart
+--- a/lib/model/vocabulary.dart	(revision 73838f1b264ea9cbbcbed00bc80beb33d43a9d3d)
++++ b/lib/model/vocabulary.dart	(date 1677669480265)
+@@ -4,8 +4,8 @@
+   String uzbek;
+   String createdAt;
+ 
+-  Vocabulary({
+-      required this.id,
++  Vocabulary(
++      {required this.id,
+       required this.english,
+       required this.uzbek,
+       required this.createdAt});
+Index: lib/pages/all_vocabulary_page.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>class AllVocabularyPage{\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/lib/pages/all_vocabulary_page.dart b/lib/pages/all_vocabulary_page.dart
+--- a/lib/pages/all_vocabulary_page.dart	(revision 73838f1b264ea9cbbcbed00bc80beb33d43a9d3d)
++++ b/lib/pages/all_vocabulary_page.dart	(date 1677673655674)
+@@ -1,3 +1,134 @@
+-class AllVocabularyPage{
++import 'package:myvocabulary/database/database.dart';
++import 'package:myvocabulary/pages/intro_page.dart';
++import 'package:myvocabulary/services/builder.dart';
++import 'package:myvocabulary/services/io_service.dart';
++
++class AllVocabularyPage extends Builder {
++  @override
++  void builder() {
++    print("""
++  In what order do you want to output the dictionary?
++   1. Return to home page
++   2. According to the created time
++   3. Sort in Uzbek language  
++   4. Sort in English
++  """);
++    int num = io.number;
++
++    switch (num) {
++      case 1:
++        {
++          IntroPage();
++        }
++        break;
++      case 2:
++        {
++          sortCreatedVocabulary();
++        }
++        break;
++      case 3:
++        {
++          sortInUzbekVocabulary();
++        }
++        break;
++      case 4:
++        {
++          sortInEnglishVocabulary();
++        }
++        break;
++      default:
++        {
++          print("Iltimos tartib raqamni tug'ri kiriting");
++          AllVocabularyPage();
++        }
++    }
++  }
++}
++
++void sortInEnglishVocabulary() {
++  print("Do you want to sort alphabetically or vice versa? (y/n)");
++  String str = io.text;
++  if (str == "n" || str == "no") {
++    vocabulary.sort((a, b) {
++      return a.english.compareTo(b.english);
++    });
++  } else if (str == "y" || str == "yes") {
++    vocabulary.sort((a, b) {
++      return b.english.compareTo(a.english);
++    });
++  } else {
++    print("Please enter the correct command");
++    sortInEnglishVocabulary();
++  }
++
++  for (int i = 0; i < vocabulary.length; i++) {
++    print("${i + 1} ${vocabulary[i].english} - ${vocabulary[i].uzbek}");
++  }
++
++  print("Back to Home(1) and Back to All vocabulary(0)");
++
++  int num = io.number;
++  if (num == 1) {
++    IntroPage();
++  } else {
++    AllVocabularyPage();
++  }
++}
++
++void sortInUzbekVocabulary() {
++  print("Do you want to sort alphabetically or vice versa? (y/n)");
++  String str = io.text;
++  if (str == "n" || str == "no") {
++    vocabulary.sort((a, b) {
++      return a.uzbek.compareTo(b.uzbek);
++    });
++  } else if (str == "y" || str == "yes") {
++    vocabulary.sort((a, b) {
++      return b.uzbek.compareTo(a.uzbek);
++    });
++  } else {
++    print("Please enter the correct command");
++    sortInEnglishVocabulary();
++  }
+ 
+-}
+\ No newline at end of file
++  for (int i = 0; i < vocabulary.length; i++) {
++    print("${i + 1} ${vocabulary[i].uzbek} - ${vocabulary[i].english}");
++  }
++  print("Back to Home(1) and Back to All vocabulary(0)");
++  int num = io.number;
++  if (num == 1) {
++    IntroPage();
++  } else {
++    AllVocabularyPage();
++  }
++}
++
++void sortCreatedVocabulary() {
++  print("Do you want to sort created or vice versa? (y/n)");
++  String str = io.text;
++  if (str == "n" || str == "no") {
++    vocabulary.sort((a, b) {
++      return a.uzbek.compareTo(b.uzbek);
++    });
++  } else if (str == "y" || str == "yes") {
++    vocabulary.sort((a, b) {
++      return b.uzbek.compareTo(a.uzbek);
++    });
++  } else {
++    print("Please enter the correct command");
++    sortInEnglishVocabulary();
++  }
++  vocabulary.sort((a, b) {
++    return a.createdAt.compareTo(b.createdAt);
++  });
++  for (int i = 0; i < vocabulary.length; i++) {
++    print("${i + 1} ${vocabulary[i].english} - ${vocabulary[i].uzbek}");
++  }
++  print("Back to Home(1) and Back to All vocabulary(0)");
++  int num = io.number;
++  if (num == 1) {
++    IntroPage();
++  } else {
++    AllVocabularyPage();
++  }
++}
+Index: myvocabulary.ipr
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"InspectionProjectProfileManager\">\r\n    <profile version=\"1.0\">\r\n      <option name=\"myName\" value=\"Project Default\" />\r\n    </profile>\r\n    <version value=\"1.0\" />\r\n  </component>\r\n  <component name=\"ProjectModuleManager\">\r\n    <modules>\r\n      <module fileurl=\"file://$PROJECT_DIR$/myvocabulary.iml\" filepath=\"$PROJECT_DIR$/myvocabulary.iml\" />\r\n    </modules>\r\n  </component>\r\n  <component name=\"ProjectRootManager\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n  <component name=\"VcsDirectoryMappings\">\r\n    <mapping directory=\"\" vcs=\"Git\" />\r\n  </component>\r\n  <component name=\"libraryTable\">\r\n    <library name=\"Dart Packages\" type=\"DartPackagesLibraryType\">\r\n      <properties>\r\n        <option name=\"packageNameToDirsMap\">\r\n          <entry key=\"_fe_analyzer_shared\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/_fe_analyzer_shared-54.0.0/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"analyzer\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/analyzer-5.6.0/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"args\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/args-2.4.0/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"async\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/async-2.10.0/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"boolean_selector\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/boolean_selector-2.1.1/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"collection\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/collection-1.17.1/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"convert\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/convert-3.1.1/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"coverage\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/coverage-1.6.3/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"crypto\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/crypto-3.0.2/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"file\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/file-6.1.4/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"frontend_server_client\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/frontend_server_client-3.2.0/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"glob\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/glob-2.1.1/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"http_multi_server\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/http_multi_server-3.2.1/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"http_parser\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/http_parser-4.0.2/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"io\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/io-1.0.4/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"js\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/js-0.6.7/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"lints\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/lints-2.0.1/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"logging\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/logging-1.1.1/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"matcher\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/matcher-0.12.14/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"meta\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/meta-1.9.0/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"mime\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/mime-1.0.4/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"node_preamble\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/node_preamble-2.0.2/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"package_config\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/package_config-2.1.0/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"path\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/path-1.8.3/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"pool\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/pool-1.5.1/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"pub_semver\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/pub_semver-2.1.3/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"shelf\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/shelf-1.4.0/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"shelf_packages_handler\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/shelf_packages_handler-3.0.1/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"shelf_static\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/shelf_static-1.1.1/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"shelf_web_socket\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/shelf_web_socket-1.0.3/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"source_map_stack_trace\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/source_map_stack_trace-2.1.1/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"source_maps\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/source_maps-0.10.12/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"source_span\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/source_span-1.9.1/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"stack_trace\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/stack_trace-1.11.0/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"stream_channel\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/stream_channel-2.1.1/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"string_scanner\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/string_scanner-1.2.0/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"term_glyph\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/term_glyph-1.2.1/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"test\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/test-1.23.1/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"test_api\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/test_api-0.4.18/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"test_core\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/test_core-0.4.24/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"typed_data\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/typed_data-1.3.1/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"vm_service\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/vm_service-11.2.0/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"watcher\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/watcher-1.0.2/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"web_socket_channel\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/web_socket_channel-2.3.0/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"webkit_inspection_protocol\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/webkit_inspection_protocol-1.2.0/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n          <entry key=\"yaml\">\r\n            <value>\r\n              <list>\r\n                <option value=\"$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/yaml-3.1.1/lib\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n        </option>\r\n      </properties>\r\n      <CLASSES>\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/_fe_analyzer_shared-54.0.0/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/analyzer-5.6.0/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/args-2.4.0/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/async-2.10.0/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/boolean_selector-2.1.1/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/collection-1.17.1/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/convert-3.1.1/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/coverage-1.6.3/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/crypto-3.0.2/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/file-6.1.4/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/frontend_server_client-3.2.0/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/glob-2.1.1/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/http_multi_server-3.2.1/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/http_parser-4.0.2/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/io-1.0.4/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/js-0.6.7/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/lints-2.0.1/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/logging-1.1.1/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/matcher-0.12.14/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/meta-1.9.0/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/mime-1.0.4/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/node_preamble-2.0.2/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/package_config-2.1.0/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/path-1.8.3/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/pool-1.5.1/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/pub_semver-2.1.3/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/shelf-1.4.0/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/shelf_packages_handler-3.0.1/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/shelf_static-1.1.1/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/shelf_web_socket-1.0.3/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/source_map_stack_trace-2.1.1/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/source_maps-0.10.12/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/source_span-1.9.1/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/stack_trace-1.11.0/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/stream_channel-2.1.1/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/string_scanner-1.2.0/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/term_glyph-1.2.1/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/test-1.23.1/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/test_api-0.4.18/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/test_core-0.4.24/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/typed_data-1.3.1/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/vm_service-11.2.0/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/watcher-1.0.2/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/web_socket_channel-2.3.0/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/webkit_inspection_protocol-1.2.0/lib\" />\r\n        <root url=\"file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/yaml-3.1.1/lib\" />\r\n      </CLASSES>\r\n      <JAVADOC />\r\n      <SOURCES />\r\n    </library>\r\n    <library name=\"Dart SDK\">\r\n      <CLASSES>\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/async\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/cli\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/collection\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/convert\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/core\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/developer\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/ffi\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/html\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/indexed_db\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/io\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/isolate\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/js\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/js_util\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/math\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/mirrors\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/svg\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/typed_data\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/web_audio\" />\r\n        <root url=\"file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/web_gl\" />\r\n      </CLASSES>\r\n      <JAVADOC />\r\n      <SOURCES />\r\n    </library>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/myvocabulary.ipr b/myvocabulary.ipr
+--- a/myvocabulary.ipr	(revision 73838f1b264ea9cbbcbed00bc80beb33d43a9d3d)
++++ b/myvocabulary.ipr	(date 1677669480283)
+@@ -398,25 +398,25 @@
+     </library>
+     <library name="Dart SDK">
+       <CLASSES>
+-        <root url="file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/async" />
+-        <root url="file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/cli" />
+-        <root url="file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/collection" />
+-        <root url="file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/convert" />
+-        <root url="file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/core" />
+-        <root url="file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/developer" />
+-        <root url="file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/ffi" />
+-        <root url="file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/html" />
+-        <root url="file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/indexed_db" />
+-        <root url="file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/io" />
+-        <root url="file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/isolate" />
+-        <root url="file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/js" />
+-        <root url="file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/js_util" />
+-        <root url="file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/math" />
+-        <root url="file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/mirrors" />
+-        <root url="file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/svg" />
+-        <root url="file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/typed_data" />
+-        <root url="file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/web_audio" />
+-        <root url="file://$PROJECT_DIR$/../../../../../../../../Development/flutter/bin/cache/dart-sdk/lib/web_gl" />
++        <root url="file://D:/dart/dart-sdk/lib/async" />
++        <root url="file://D:/dart/dart-sdk/lib/cli" />
++        <root url="file://D:/dart/dart-sdk/lib/collection" />
++        <root url="file://D:/dart/dart-sdk/lib/convert" />
++        <root url="file://D:/dart/dart-sdk/lib/core" />
++        <root url="file://D:/dart/dart-sdk/lib/developer" />
++        <root url="file://D:/dart/dart-sdk/lib/ffi" />
++        <root url="file://D:/dart/dart-sdk/lib/html" />
++        <root url="file://D:/dart/dart-sdk/lib/indexed_db" />
++        <root url="file://D:/dart/dart-sdk/lib/io" />
++        <root url="file://D:/dart/dart-sdk/lib/isolate" />
++        <root url="file://D:/dart/dart-sdk/lib/js" />
++        <root url="file://D:/dart/dart-sdk/lib/js_util" />
++        <root url="file://D:/dart/dart-sdk/lib/math" />
++        <root url="file://D:/dart/dart-sdk/lib/mirrors" />
++        <root url="file://D:/dart/dart-sdk/lib/svg" />
++        <root url="file://D:/dart/dart-sdk/lib/typed_data" />
++        <root url="file://D:/dart/dart-sdk/lib/web_audio" />
++        <root url="file://D:/dart/dart-sdk/lib/web_gl" />
+       </CLASSES>
+       <JAVADOC />
+       <SOURCES />

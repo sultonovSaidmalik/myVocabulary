@@ -1,0 +1,17 @@
+Index: lib/database/database.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import '../model/vocabulary.dart';\r\n\r\nList<Vocabulary> listVocabulary=[\r\n  Vocabulary(id: id, word: word, translation: translation, createdAt: createdAt),\r\n];\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/lib/database/database.dart b/lib/database/database.dart
+--- a/lib/database/database.dart	(revision cf0420da19515b0852eb908e94f0630eda7ae73f)
++++ b/lib/database/database.dart	(date 1677666041479)
+@@ -1,5 +1,5 @@
+ import '../model/vocabulary.dart';
+ 
+ List<Vocabulary> listVocabulary=[
+-  Vocabulary(id: id, word: word, translation: translation, createdAt: createdAt),
++  Vocabulary(id: 1, word: "word", translation: "so'z", createdAt: ""),
+ ];
