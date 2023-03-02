@@ -1,12 +1,14 @@
 import 'package:myvocabulary/pages/game_settings_page.dart';
+import 'package:myvocabulary/services/builder.dart';
+import 'package:myvocabulary/services/utils.dart';
 
 import '../services/io_service.dart';
 import 'intro_page.dart';
 
-class GamePage{
-  GamePage(){gamePage();}
-
-  void gamePage() {
+class GamePage extends Builder{
+ @override
+  void builder() {
+    super.builder();
     int rightAnswer = 0;
     int totalTest = testList.length;
     double result = 0;
@@ -145,12 +147,12 @@ class GamePage{
     switch (page) {
       case 1:
         {
-          GameSettingsPage();
+          GamePage();
         }
         break;
       case 0:
         {
-          IntroPage();
+          Utils.exit();
         }
         break;
     }
