@@ -147,7 +147,7 @@ class GamePage extends Builder{
     switch (page) {
       case 1:
         {
-          GamePage();
+          IntroPage();
         }
         break;
       case 0:
