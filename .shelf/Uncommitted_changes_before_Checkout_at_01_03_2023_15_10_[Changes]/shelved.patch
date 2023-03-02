@@ -1,0 +1,16 @@
+Index: bin/myvocabulary.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import 'package:myvocabulary/myvocabulary.dart' as myvocabulary;\r\n\r\nvoid main(List<String> arguments) {\r\n  print('Hello world: ${myvocabulary.calculate()}!');\r\n}\r\n
+===================================================================
+diff --git a/bin/myvocabulary.dart b/bin/myvocabulary.dart
+--- a/bin/myvocabulary.dart	
++++ b/bin/myvocabulary.dart	
+@@ -1,5 +1,3 @@
+-import 'package:myvocabulary/myvocabulary.dart' as myvocabulary;
+-
+-void main(List<String> arguments) {
+-  print('Hello world: ${myvocabulary.calculate()}!');
++void main() {
++  print('Hello world');
+ }

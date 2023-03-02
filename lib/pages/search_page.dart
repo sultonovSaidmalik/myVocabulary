@@ -22,12 +22,12 @@ class SearchPage extends Builder {
     int page = io.number;
 
     switch (page) {
-      case 1:
+      case 0:
         {
           IntroPage();
         }
         break;
-      case 0:
+      case 1:
         {
           Utils.exit();
         }

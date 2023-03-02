@@ -9,18 +9,61 @@ class SortVocabulary {
     for (int i = 0; i < vocabulary.length; i++) {
       print("${i + 1} ${vocabulary[i].english} - ${vocabulary[i].uzbek}");
     }
+    print("\n");
+    print("""
+   1. Return to top of sort
+   2. Update
+   3. Delete
+   0. Back
+  """);
+    int num = io.number;
+    switch (num) {
+      case 0:
+        {
+          AllVocabularyPage();
+        }
+        break;
+      case 1:
+        {
+          allVocabulary();
+        }
+        break;
+      case 2:
+        {
+          print("Select the order of the word you want to change");
+          String num = io.text;
+          for (var item in vocabulary) {
+            if (num.toLowerCase() == item.english.toLowerCase() || num.toLowerCase() == item.uzbek.toLowerCase()) {
+              UpdateDeleteVocabulary.updateVocabulary(item.id);
+              allVocabulary();
+            }
+          }
+        }break;
+      case 3:
+        {
+          print("Select the order of the word you want to change");
+          String num = io.text;
+          for (var item in vocabulary) {
+            if (num.toLowerCase() == item.english.toLowerCase() || num.toLowerCase() == item.uzbek.toLowerCase()) {
+              UpdateDeleteVocabulary.deleteVocabulary(item.id);
+              allVocabulary();
+            }
+          }
+        }
+        break;
+    }
   }
-
+///Sort English Vocabulary
   static void sortInEnglishVocabulary() {
     print("Do you want to sort alphabetically or vice versa? (y/n)");
     String str = io.text;
     if (str == "n" || str == "no") {
       vocabulary.sort((a, b) {
-        return a.english.compareTo(b.english);
+        return a.english.toLowerCase().compareTo(b.english.toLowerCase());
       });
     } else if (str == "y" || str == "yes") {
       vocabulary.sort((a, b) {
-        return b.english.compareTo(a.english);
+        return b.english.toLowerCase().compareTo(a.english.toLowerCase());
       });
     } else {
       print("Please enter the correct command");
@@ -30,6 +73,7 @@ class SortVocabulary {
     for (int i = 0; i < vocabulary.length; i++) {
       print("${i + 1} ${vocabulary[i].english} - ${vocabulary[i].uzbek}");
     }
+    print("\n");
 
     print("""
    1. Return to top of sort
@@ -54,7 +98,7 @@ class SortVocabulary {
           print("Select the order of the word you want to change");
           String num = io.text;
           for (var item in vocabulary) {
-            if (num  == item.english||num  == item.uzbek) {
+            if (num.toLowerCase() == item.english.toLowerCase() || num.toLowerCase() == item.uzbek.toLowerCase()) {
               UpdateDeleteVocabulary.updateVocabulary(item.id);
               sortInEnglishVocabulary();
             }
@@ -66,7 +110,7 @@ class SortVocabulary {
           print("Select the order of the word you want to change");
           String num = io.text;
           for (var item in vocabulary) {
-            if (num  == item.english||num  == item.uzbek) {
+            if (num.toLowerCase() == item.english.toLowerCase() || num.toLowerCase() == item.uzbek.toLowerCase()) {
               UpdateDeleteVocabulary.deleteVocabulary(item.id);
               sortInEnglishVocabulary();
             }
@@ -79,17 +123,17 @@ class SortVocabulary {
         }
     }
   }
-
+///Sort Uzbek Vocabulary
   static void sortInUzbekVocabulary() {
     print("Do you want to sort alphabetically or vice versa? (y/n)");
     String str = io.text;
     if (str == "n" || str == "no") {
       vocabulary.sort((a, b) {
-        return a.uzbek.compareTo(b.uzbek);
+        return a.uzbek.toLowerCase().compareTo(b.uzbek.toLowerCase());
       });
     } else if (str == "y" || str == "yes") {
       vocabulary.sort((a, b) {
-        return b.uzbek.compareTo(a.uzbek);
+        return b.uzbek.toLowerCase().compareTo(a.uzbek.toLowerCase());
       });
     } else {
       print("Please enter the correct command");
@@ -99,6 +143,7 @@ class SortVocabulary {
     for (int i = 0; i < vocabulary.length; i++) {
       print("${i + 1} ${vocabulary[i].uzbek} - ${vocabulary[i].english}");
     }
+    print("\n");
 
     print("""
    1. Return to top of sort
@@ -123,7 +168,7 @@ class SortVocabulary {
           print("Select the order of the word you want to change");
           String num = io.text;
           for (var item in vocabulary) {
-            if (num  == item.english||num==item.uzbek) {
+            if (num.toLowerCase() == item.english.toLowerCase() || num.toLowerCase() == item.uzbek.toLowerCase()) {
               UpdateDeleteVocabulary.updateVocabulary(item.id);
               sortInUzbekVocabulary();
             }
@@ -135,7 +180,7 @@ class SortVocabulary {
           print("Select the order of the word you want to change");
           String num = io.text;
           for (var item in vocabulary) {
-            if (num  == item.english||item.uzbek==num) {
+            if (num.toLowerCase() == item.english.toLowerCase() || num.toLowerCase() == item.uzbek.toLowerCase()) {
               UpdateDeleteVocabulary.deleteVocabulary(item.id);
               sortInUzbekVocabulary();
             }
@@ -148,17 +193,17 @@ class SortVocabulary {
         }
     }
   }
-
+///sort Created Vocabulary
   static void sortCreatedVocabulary() {
     print("Do you want to sort created or vice versa? (y/n)");
     String str = io.text;
     if (str == "n" || str == "no") {
       vocabulary.sort((a, b) {
-        return a.uzbek.toLowerCase().compareTo(b.uzbek.toLowerCase());
+        return a.createdAt.compareTo(b.createdAt);
       });
     } else if (str == "y" || str == "yes") {
       vocabulary.sort((a, b) {
-        return b.uzbek.compareTo(a.uzbek);
+        return b.createdAt.compareTo(a.createdAt);
       });
     } else {
       print("Please enter the correct command");
@@ -170,6 +215,7 @@ class SortVocabulary {
     for (int i = 0; i < vocabulary.length; i++) {
       print("${i + 1} ${vocabulary[i].english} - ${vocabulary[i].uzbek}");
     }
+    print("\n");
 
     print("""
    1. Return to top of sort
@@ -194,7 +240,7 @@ class SortVocabulary {
           print("Select the order of the word you want to change");
           String num = io.text;
           for (var item in vocabulary) {
-            if (num  == item.english||item.uzbek==num) {
+            if (num.toLowerCase() == item.english.toLowerCase() || num.toLowerCase() == item.uzbek.toLowerCase()) {
               UpdateDeleteVocabulary.updateVocabulary(item.id);
               sortCreatedVocabulary();
             }
@@ -206,7 +252,7 @@ class SortVocabulary {
           print("Select the order of the word you want to change");
           String num = io.text;
           for (var item in vocabulary) {
-            if (num == item.english||num==item.uzbek) {
+            if (num.toLowerCase() == item.english.toLowerCase() || num.toLowerCase() == item.uzbek.toLowerCase()) {
               UpdateDeleteVocabulary.deleteVocabulary(item.id);
               sortCreatedVocabulary();
             }
@@ -220,6 +266,3 @@ class SortVocabulary {
     }
   }
 }
-
-
-
