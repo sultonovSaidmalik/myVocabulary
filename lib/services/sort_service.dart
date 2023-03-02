@@ -41,17 +41,17 @@ class SortVocabulary {
         }
     }
   }
-
+///Sort English Vocabulary
   static void sortInEnglishVocabulary() {
     print("Do you want to sort alphabetically or vice versa? (y/n)");
     String str = io.text;
     if (str == "n" || str == "no") {
       vocabulary.sort((a, b) {
-        return a.english.compareTo(b.english);
+        return a.english.toLowerCase().compareTo(b.english.toLowerCase());
       });
     } else if (str == "y" || str == "yes") {
       vocabulary.sort((a, b) {
-        return b.english.compareTo(a.english);
+        return b.english.toLowerCase().compareTo(a.english.toLowerCase());
       });
     } else {
       print("Please enter the correct command");
@@ -111,17 +111,17 @@ class SortVocabulary {
         }
     }
   }
-
+///Sort Uzbek Vocabulary
   static void sortInUzbekVocabulary() {
     print("Do you want to sort alphabetically or vice versa? (y/n)");
     String str = io.text;
     if (str == "n" || str == "no") {
       vocabulary.sort((a, b) {
-        return a.uzbek.compareTo(b.uzbek);
+        return a.uzbek.toLowerCase().compareTo(b.uzbek.toLowerCase());
       });
     } else if (str == "y" || str == "yes") {
       vocabulary.sort((a, b) {
-        return b.uzbek.compareTo(a.uzbek);
+        return b.uzbek.toLowerCase().compareTo(a.uzbek.toLowerCase());
       });
     } else {
       print("Please enter the correct command");
@@ -181,17 +181,17 @@ class SortVocabulary {
         }
     }
   }
-
+///sort Created Vocabulary
   static void sortCreatedVocabulary() {
     print("Do you want to sort created or vice versa? (y/n)");
     String str = io.text;
     if (str == "n" || str == "no") {
       vocabulary.sort((a, b) {
-        return a.uzbek.toLowerCase().compareTo(b.uzbek.toLowerCase());
+        return a.createdAt.compareTo(b.createdAt);
       });
     } else if (str == "y" || str == "yes") {
       vocabulary.sort((a, b) {
-        return b.uzbek.compareTo(a.uzbek);
+        return b.createdAt.compareTo(a.createdAt);
       });
     } else {
       print("Please enter the correct command");
