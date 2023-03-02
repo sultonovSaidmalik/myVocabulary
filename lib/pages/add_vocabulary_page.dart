@@ -31,9 +31,9 @@ class AddVocabulary extends Builder {
           uzbek: uzbek,
           createdAt: DateTime.now().toString()));
       print('\t\t Succesfully Created ');
-      io.console('Do you want to add more ?\nyes\nno\n');
+      io.console('Do you want to add more ?\n1.yes\n0.no\n');
       String yesno = io.text;
-      if (yesno.toLowerCase() == 'yes' || yesno.toLowerCase() == 'y') {
+      if (yesno.toLowerCase() == '1' || yesno.toLowerCase() == '1') {
         AddVocabulary();
       }
       print('1. Back');
