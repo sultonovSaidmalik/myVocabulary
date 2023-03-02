@@ -14,9 +14,10 @@ class GameSettingsPage{
   void gameSettings(){
     print('Enter a quantity of test');
     print('You have a ${vocabulary.length-1} dictionary');
+    print('Select no less 5');
     int quantity = io.number;
-    if(quantity > vocabulary.length){
-      print('No enough dictionary!\n');gameSettings();
+    if(quantity > vocabulary.length || quantity<5){
+      print('No enough dictionary! or error quantity\n');gameSettings();
     }
 
     List<Vocabulary> vocabularyCopy = [];
